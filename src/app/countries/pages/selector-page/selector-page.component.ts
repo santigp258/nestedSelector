@@ -19,10 +19,11 @@ export class SelectorPageComponent implements OnInit {
   //push selectores
   regions: string[] = [];
   countries: CountrySmall[] = [];
-  country!: string[];
+  //country!: string[];
+  country!: CountrySmall[];
 
   //UI
-  loading:boolean = false;
+  loading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -59,10 +60,15 @@ export class SelectorPageComponent implements OnInit {
           this.loading = true;
         }),
         delay(1000),
-        switchMap((code) => this.countriesService.getCountryByAlphaCode(code))
+        switchMap((code) => this.countriesService.getCountryByAlphaCode(code)),
+        switchMap((country) =>
+          this.countriesService.getCountryByBorder(country?.borders!)
+        )
       )
       .subscribe((country) => {
-        this.country = country?.borders || [];
+        //  this.country = country?.borders || [];
+        this.country = country;
+        console.log(country);
         this.loading = false;
       });
   }

@@ -35,10 +35,10 @@
         <select class="form-select" formControlName="borderCountry">
           <option value="">---SELECT CONTRY--</option>
           <option
-            [value]="borderCountry"
+            [value]="borderCountry.alpha3Code"
             *ngFor="let borderCountry of country"
           >
-            {{ borderCountry }}
+            {{ borderCountry.name }}
           </option>
         </select>
       </div>
