@@ -1,52 +1,68 @@
+<h1 class="mt-5">Nested Selectores</h1>
+<hr />
+<br />
+<form [formGroup]="myForm" (ngSubmit)="submit()">
+  <!-- Continent -->
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Continent</label>
+      <select class="form-select" formControlName="region">
+        <option value="">---SELECT CONTINENT--</option>
+        <option [value]="region | lowercase" *ngFor="let region of regions">
+          {{ region }}
+        </option>
+      </select>
+    </div>
+  </div>
 
-  <h1 class="mt-5">Nested Selectores</h1>
-  <hr />
-  <br>
-  <form [formGroup]="myForm" (ngSubmit)="submit()">
-    <!-- Continent -->
-    <div class="row mb-3">
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="countries.length !== 0">
+    <div class="col">
+      <label class="form-label">Country</label>
+      <select class="form-select" formControlName="country">
+        <option value="">---SELECT CONTRY--</option>
+        <option [value]="country.alpha3Code" *ngFor="let country of countries">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="country?.borders.length > 0">
+    <div class="col">
+      <label class="form-label">Border Country</label>
+      <select class="form-select" formControlName="borderCountry">
+        <option value="">---SELECT CONTRY--</option>
+        <option
+          [value]="borderCountry"
+          *ngFor="let borderCountry of country?.borders"
+        >
+          {{ borderCountry }}
+        </option>
+      </select>
+    </div>
+  </div>
+    <div class="row" *ngIf="country?.borders.length <= 0 && country?.borders">
       <div class="col">
-        <label class="form-label">Continent</label>
-        <select class="form-select" formControlName="region">
-          <option value="">---SELECT CONTINENT--</option>
-          <option [value]="region | lowercase" *ngFor="let region of regions">{{region}}</option>
-        </select>
+        <div class="alert alert-primary">There is not borders...</div>
       </div>
     </div>
 
-    <!-- Countries -->
-    <div class="row mb-3">
-      <div class="col">
-        <label class="form-label">Country</label>
-        <select class="form-select" formControlName="country">
-          <option value="">---SELECT CONTRY--</option>
-          <option [value]="country.alpha3Code" *ngFor="let country of countries">{{country.name}}</option>
-        </select>
-      </div>
+  <div class="row" *ngIf="loading">
+    <div class="col">
+      <div class="alert alert-primary">Loading...</div>
     </div>
+  </div>
 
-
-       <!-- Countries -->
-       <div class="row mb-3">
-        <div class="col">
-          <label class="form-label">Border Country</label>
-          <select class="form-select" formControlName="borderCountry">
-            <option value="">---SELECT CONTRY--</option>
-            <option [value]="borderCountry" *ngFor="let borderCountry of country?.borders">{{borderCountry}}</option>
-          </select>
-        </div>
-      </div>
-
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary float-end" type="submit">Select</button>
-        </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">Select</button>
     </div>
-  </form>
-  <h3>Form</h3>
-  <pre>{{ myForm.valid }}</pre>
-  <pre>{{ myForm.value | json }}</pre>
+  </div>
+</form>
+<h3>Form</h3>
+<pre>{{ myForm.valid }}</pre>
+<pre>{{ myForm.value | json }}</pre>
 
-  <pre>{{country?.borders | json}}</pre>
-
-
+<pre>{{ country?.borders | json }}</pre>
