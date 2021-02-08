@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "nestedSelector"
+  "defaultProject": "nestedSelector",
+  "cli": {
+    "analytics": "8918edce-4bed-4696-b834-bb1506a93515"
+  }
 }
