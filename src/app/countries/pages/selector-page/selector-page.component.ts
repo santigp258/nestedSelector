@@ -45,11 +45,17 @@ export class SelectorPageComponent implements OnInit {
       });
 
     //when change country
-    this.myForm.get('country')?.valueChanges.subscribe((country) => {
-      this.countriesService.getCountryByAlphaCode(country).subscribe(
-        (country) => this.country = country
+    this.myForm
+      .get('country')
+      ?.valueChanges.pipe(
+        tap((borderCountry) => {
+          this.myForm.get('borderCountry')?.reset(''); //clean myform.country
+        }),
+        switchMap((code) => this.countriesService.getCountryByAlphaCode(code))
       )
-    });
+      .subscribe((country) => {
+        this.country = country;
+      });
   }
 
   submit() {}
