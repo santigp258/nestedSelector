@@ -32,7 +32,7 @@
           <label class="form-label">Border Country</label>
           <select class="form-select" formControlName="borderCountry">
             <option value="">---SELECT CONTRY--</option>
-            <option [value]="borderCountry.alpha3Code" *ngFor="let borderCountry of countries">{{borderCountry.name}}</option>
+            <option [value]="borderCountry" *ngFor="let borderCountry of country?.borders">{{borderCountry}}</option>
           </select>
         </div>
       </div>
@@ -46,5 +46,7 @@
   <h3>Form</h3>
   <pre>{{ myForm.valid }}</pre>
   <pre>{{ myForm.value | json }}</pre>
+
+  <pre>{{country?.borders | json}}</pre>
 
 
