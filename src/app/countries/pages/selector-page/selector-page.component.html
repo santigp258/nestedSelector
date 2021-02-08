@@ -25,6 +25,18 @@
       </div>
     </div>
 
+
+       <!-- Countries -->
+       <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">Border Country</label>
+          <select class="form-select" formControlName="borderCountry">
+            <option value="">---SELECT CONTRY--</option>
+            <option [value]="borderCountry.alpha3Code" *ngFor="let borderCountry of countries">{{borderCountry.name}}</option>
+          </select>
+        </div>
+      </div>
+
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-end" type="submit">Select</button>

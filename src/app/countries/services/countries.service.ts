@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CountrySmall } from '../interfaces/countries.interface';
+import { CountrySmall, Country } from '../interfaces/countries.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,5 +25,9 @@ export class CountriesService {
     return this.http.get<CountrySmall[]>(url);
   }
 
+  getCountryByAlphaCode(code: string): Observable<Country> {
+    const url = `${this.baseUrl}/alpha/${code}`;
+    return this.http.get<Country>(url);
+  }
   constructor(private http: HttpClient) {}
 }
