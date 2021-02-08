@@ -28,27 +28,22 @@
     </div>
   </div>
 
-  <!-- Countries -->
-  <div class="row mb-3" *ngIf="country?.borders.length > 0">
-    <div class="col">
-      <label class="form-label">Border Country</label>
-      <select class="form-select" formControlName="borderCountry">
-        <option value="">---SELECT CONTRY--</option>
-        <option
-          [value]="borderCountry"
-          *ngFor="let borderCountry of country?.borders"
-        >
-          {{ borderCountry }}
-        </option>
-      </select>
-    </div>
-  </div>
-    <div class="row" *ngIf="country?.borders.length <= 0 && country?.borders">
+    <!-- Country -->
+    <div class="row mb-3" *ngIf="country?.length > 0">
       <div class="col">
-        <div class="alert alert-primary">There is not borders...</div>
+        <label class="form-label">Border Country</label>
+        <select class="form-select" formControlName="borderCountry">
+          <option value="">---SELECT CONTRY--</option>
+          <option
+            [value]="borderCountry"
+            *ngFor="let borderCountry of country"
+          >
+            {{ borderCountry }}
+          </option>
+        </select>
       </div>
     </div>
-
+    
   <div class="row" *ngIf="loading">
     <div class="col">
       <div class="alert alert-primary">Loading...</div>
@@ -65,4 +60,4 @@
 <pre>{{ myForm.valid }}</pre>
 <pre>{{ myForm.value | json }}</pre>
 
-<pre>{{ country?.borders | json }}</pre>
+<pre>{{ country | json }}</pre>

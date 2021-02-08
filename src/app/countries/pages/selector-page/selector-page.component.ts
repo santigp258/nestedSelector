@@ -19,7 +19,7 @@ export class SelectorPageComponent implements OnInit {
   //push selectores
   regions: string[] = [];
   countries: CountrySmall[] = [];
-  country!: Country | null;
+  country!: string[];
 
   //UI
   loading:boolean = false;
@@ -62,7 +62,7 @@ export class SelectorPageComponent implements OnInit {
         switchMap((code) => this.countriesService.getCountryByAlphaCode(code))
       )
       .subscribe((country) => {
-        this.country = country;
+        this.country = country?.borders || [];
         this.loading = false;
       });
   }
