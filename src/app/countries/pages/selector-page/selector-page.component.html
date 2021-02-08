@@ -1,15 +1,26 @@
-<h1 class="mt-5">Nested Selectores</h1>
-<hr />
-<div class="container">
+
+  <h1 class="mt-5">Nested Selectores</h1>
+  <hr />
+  <br>
   <form [formGroup]="myForm" (ngSubmit)="submit()">
+    <!-- Continent -->
     <div class="row mb-3">
       <div class="col">
         <label class="form-label">Continent</label>
         <select class="form-select" formControlName="region">
           <option value="">---SELECT CONTINENT--</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option [value]="region | lowercase" *ngFor="let region of regions">{{region}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Countries -->
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Country</label>
+        <select class="form-select" formControlName="country">
+          <option value="">---SELECT CONTRY--</option>
+          <option [value]="country.alpha3Code" *ngFor="let country of countries">{{country.name}}</option>
         </select>
       </div>
     </div>
@@ -23,5 +34,5 @@
   <h3>Form</h3>
   <pre>{{ myForm.valid }}</pre>
   <pre>{{ myForm.value | json }}</pre>
-</div>
+
 
